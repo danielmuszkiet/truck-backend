@@ -32,7 +32,7 @@ app.post("/send-email", (req, res) => {
     from: process.env.MAIL,
     to: "danielmuszkiet.marketing@gmail.com",
     subject: "Anfrage",
-    text: `${msg} \n\nAbholung: ${from}\tRückgabe: ${to}\nJeep Typ: ${jeepType}\nErfahrung ${
+    text: `${msg} \n\nAbholung: ${from}\nRückgabe: ${to}\nJeep Typ: ${jeepType}\nErfahrung ${
       exp == 1 ? "Ja" : "Nein"
     }\nTelefonnummer: ${tel}`,
   };
