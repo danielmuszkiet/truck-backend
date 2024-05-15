@@ -21,17 +21,20 @@ let transporter = createTransport({
   },
 });
 
+
 // POST route to send email
 app.post("/send-email", (req, res) => {
   // Extract data from the request body
-  const { to, subject, email, msg, from } = req.body;
+  const { to, email, msg, from, tel, exp, jeepType } = req.body;
   console.log(req.body);
   // Setup email data
   let mailOptions = {
     from: process.env.MAIL,
     to: "danielmuszkiet.marketing@gmail.com",
     subject: "Anfrage",
-    text: `${msg} \nAbholung: ${from}\nRückgabe: ${to}`,
+    text: `${msg} \n\nAbholung: ${from}\tRückgabe: ${to}\nJeep Typ: ${jeepType}\nErfahrung ${
+      exp == 1 ? "Ja" : "Nein"
+    }\nTelefonnummer: ${tel}`,
   };
 
   // Send the email2
@@ -48,8 +51,10 @@ app.post("/send-email", (req, res) => {
   mailOptions = {
     from: process.env.MAIL,
     to: email,
-    subject: "Bestätigung",
-    text: `Wir haben deine Nachricht erhalten \n${msg} \nAbholung: ${from}\nRückgabe: ${to} `,
+    subject: "Bestätigung Ihrer Anfrage",
+    text: `Wir haben deine Nachricht erhalten \n\n------\n${msg} \n\nAbholung: ${from}\tRückgabe: ${to}\nJeep Typ: ${jeepType}\nErfahrung ${
+      exp == 1 ? "Ja" : "Nein"
+    }\nTelefonnummer: ${tel}`,
   };
 
   // Send the email
