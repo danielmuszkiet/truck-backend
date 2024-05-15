@@ -15,8 +15,8 @@ app.use(express.json());
 let transporter = createTransport({
   service: "Gmail",
   auth: {
-    user: "trailex.offroad@gmail.com",
-    pass: "yutp emgz szwa dxsc",
+    user: process.env.MAIL,
+    pass: process.env.PASS,
   },
 });
 
@@ -27,7 +27,7 @@ app.post("/send-email", (req, res) => {
   console.log(req.body);
   // Setup email data
   let mailOptions = {
-    from: "trailex.offroad@gmail.com",
+    from: process.env.MAIL,
     to: "danielmuszkiet.marketing@gmail.com",
     subject: subject,
     text: "Das ist eine TestMail ",
