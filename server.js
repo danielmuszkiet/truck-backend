@@ -24,14 +24,14 @@ let transporter = createTransport({
 // POST route to send email
 app.post("/send-email", (req, res) => {
   // Extract data from the request body
-  const { to, subject, text, email, msg, from } = req.body;
+  const { to, subject, email, msg, from } = req.body;
   console.log(req.body);
   // Setup email data
   let mailOptions = {
     from: process.env.MAIL,
     to: "danielmuszkiet.marketing@gmail.com",
     subject: "Anfrage",
-    text: "Das ist eine TestMail ",
+    text: `${msg} \nAbholung: ${from}\nRückgabe: ${to}`,
   };
 
   // Send the email2
@@ -49,7 +49,7 @@ app.post("/send-email", (req, res) => {
     from: process.env.MAIL,
     to: email,
     subject: "Bestätigung",
-    text: "Wir haben deine Nachricht erhalten ",
+    text: `Wir haben deine Nachricht erhalten \n${msg} \nAbholung: ${from}\nRückgabe: ${to} `,
   };
 
   // Send the email
