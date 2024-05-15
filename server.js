@@ -1,5 +1,6 @@
 import express, { json, response } from "express";
 import { createTransport } from "nodemailer";
+import cors from "cors";
 
 const app = express();
 const PORT = process.env.PORT;
@@ -10,7 +11,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Parse JSON bodies (as sent by API clients)
 app.use(express.json());
-
+app.use(cors());
 // Create a Nodemailer transporter using SMTP
 let transporter = createTransport({
   service: "Gmail",
