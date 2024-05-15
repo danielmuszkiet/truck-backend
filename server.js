@@ -1,0 +1,55 @@
+import express, { json, response } from "express";
+import { createTransport } from "nodemailer";
+
+const app = express();
+const PORT = process.env.PORT;
+console.log(PORT);
+
+// Parse URL-encoded bodies (as sent by HTML forms)
+app.use(express.urlencoded({ extended: true }));
+
+// Parse JSON bodies (as sent by API clients)
+app.use(express.json());
+
+// Create a Nodemailer transporter using SMTP
+let transporter = createTransport({
+  service: "Gmail",
+  auth: {
+    user: "trailex.offroad@gmail.com",
+    pass: "yutp emgz szwa dxsc",
+  },
+});
+
+// POST route to send email
+app.post("/send-email", (req, res) => {
+  // Extract data from the request body
+  const { to, subject, text } = req.body;
+  console.log(req.body);
+  // Setup email data
+  let mailOptions = {
+    from: "trailex.offroad@gmail.com",
+    to: "danielmuszkiet.marketing@gmail.com",
+    subject: subject,
+    text: "Das ist eine TestMail ",
+  };
+
+  // Send the email
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error("Error occurred:", error);
+      res.status(500).send("Failed to send email");
+    } else {
+      console.log("Email sent:", info.response);
+      res.status(200).send("Email sent successfully");
+    }
+  });
+});
+
+app.get("/", (req, res) => {
+  res.status(200).send("Server Running!");
+});
+
+// Start the server
+app.listen(PORT, () => {
+  console.log(`app is running on port ${PORT}`);
+});
