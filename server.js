@@ -47,7 +47,7 @@ app.post("/send-email", (req, res) => {
 
   mailOptions = {
     from: process.env.MAIL,
-    to: "email",
+    to: email,
     subject: "Bestätigung",
     text: "Wir haben deine Nachricht erhalten ",
   };
