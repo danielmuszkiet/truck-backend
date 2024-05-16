@@ -26,7 +26,7 @@ let transporter = createTransport({
 app.post("/send-email", (req, res) => {
   // Extract data from the request body
   const { to, email, msg, from, tel, exp, jeepType, yesno } = req.body;
-  console.log(req.body);
+  console.log(req.body, process.env.PASS, process.env.MAIL);
 
   // Setup email data
   let mailOptions = {
