@@ -27,17 +27,16 @@ app.post("/send-email", (req, res) => {
   // Extract data from the request body
   const { to, email, msg, from, tel, exp, jeepType, yesno } = req.body;
   console.log(req.body);
+
   // Setup email data
   let mailOptions = {
     from: process.env.MAIL,
-    to: "danielmuszkiet.marketing@gmail.com",
-    subject: "Anfrage",
-    text: `${msg} \n\nAbholung: ${from}\nRückgabe: ${to}\nJeep Typ: ${jeepType}\nErfahrung ${
-      yesno == 1 ? "Ja" : "Nein"
-    }\nTelefonnummer: ${tel}`,
+    to: email,
+    subject: "Bestätigung Ihrer Anfrage",
+    text: `${from}\n${to}\n${jeepType}\n${exp}\n${tel}\n${yesno}\n${msg}\n`,
   };
 
-  // Send the email2
+  // Send the email
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
       console.error("Error occurred:", error);
