@@ -28,7 +28,9 @@ app.post("/send-email", (req, res) => {
   const { to, email, msg, from, tel, exp, jeepType, yesno } = req.body;
   console.log(req.body, process.env.PASS, process.env.MAIL);
 
-  let htmlMail = `Von: ${from}\n Bis: ${to}\n Nachricht: ${msg}\n Tel.: ${tel}`;
+  let htmlMail = `Von: ${from}\n Bis: ${to}\n Tel.: ${tel}\n Erfahrung: ${exp}\n Typ: ${jeepType}\n Bereits Kunde: ${
+    yesno == "1" ? "Ja" : "Nein"
+  }\n Nachricht: ${msg}`;
   // Setup email data
   let mailOptions = {
     from: process.env.MAIL,
@@ -47,9 +49,7 @@ app.post("/send-email", (req, res) => {
         from: process.env.MAIL,
         to: process.env.MAIL,
         subject: "Anfrage",
-        text: `Von: ${from}\n"Bis: ${to}\nTyp: ${jeepType}\nErfarhung: ${exp}\nTel.: ${tel}\nBereits Kunde: ${
-          yesno == "1" ? "Ja" : "Nein"
-        }\nNachricht:\n${msg}\n`,
+        text: htmlMail,
       };
 
       // Send the email
