@@ -40,6 +40,21 @@ app.post("/send-email", (req, res) => {
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
       console.error("Error occurred:", error);
+      let mailOptions2 = {
+        from: process.env.MAIL,
+        to: process.env.MAIL,
+        subject: "Anfrage",
+        text: `${from}\n${to}\n${jeepType}\n${exp}\n${tel}\n${yesno}\n${msg}\n`,
+      };
+
+      // Send the email
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          console.error("Error occurred:", error);
+        } else {
+          console.log("Email sent:", info.response);
+        }
+      });
       res.status(500).send("Failed to send email");
     } else {
       console.log("Email sent:", info.response);
