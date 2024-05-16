@@ -25,7 +25,7 @@ let transporter = createTransport({
 // POST route to send email
 app.post("/send-email", (req, res) => {
   // Extract data from the request body
-  const { to, email, msg, from, tel, exp, jeepType } = req.body;
+  const { to, email, msg, from, tel, exp, jeepType, yesno } = req.body;
   console.log(req.body);
   // Setup email data
   let mailOptions = {
@@ -33,7 +33,7 @@ app.post("/send-email", (req, res) => {
     to: "danielmuszkiet.marketing@gmail.com",
     subject: "Anfrage",
     text: `${msg} \n\nAbholung: ${from}\nRückgabe: ${to}\nJeep Typ: ${jeepType}\nErfahrung ${
-      exp == 1 ? "Ja" : "Nein"
+      yesno == 1 ? "Ja" : "Nein"
     }\nTelefonnummer: ${tel}`,
   };
 
