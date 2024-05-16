@@ -47,26 +47,6 @@ app.post("/send-email", (req, res) => {
       res.status(200).send("Email sent successfully");
     }
   });
-
-  mailOptions = {
-    from: process.env.MAIL,
-    to: email,
-    subject: "Bestätigung Ihrer Anfrage",
-    text: `Wir haben deine Nachricht erhalten \n\n------\n${msg} \n\nAbholung: ${from}\tRückgabe: ${to}\nJeep Typ: ${jeepType}\nErfahrung ${
-      exp == 1 ? "Ja" : "Nein"
-    }\nTelefonnummer: ${tel}`,
-  };
-
-  // Send the email
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.error("Error occurred:", error);
-      res.status(500).send("Failed to send email");
-    } else {
-      console.log("Email sent:", info.response);
-      res.status(200).send("Email sent successfully");
-    }
-  });
 });
 
 
