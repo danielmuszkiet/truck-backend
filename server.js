@@ -115,6 +115,8 @@ app.post("/send-email", (req, res) => {
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
       console.error("Error occurred:", error);
+      res.status(500).send("Failed to send email");
+    } else {
       let mailOptions2 = {
         from: process.env.MAIL,
         to: process.env.MAIL,
@@ -127,13 +129,12 @@ app.post("/send-email", (req, res) => {
       // Send the email
       transporter.sendMail(mailOptions2, (error, info) => {
         if (error) {
-          console.error("Error occurred:", error);
+          console.error("Error2 occurred:", error);
         } else {
-          console.log("Email sent:", info.response);
+          console.log("Email2 sent:", info.response);
         }
       });
-      res.status(500).send("Failed to send email");
-    } else {
+
       console.log("Email sent:", info.response);
       res.status(200).send("Email sent successfully");
     }
