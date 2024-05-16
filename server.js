@@ -48,7 +48,7 @@ app.post("/send-email", (req, res) => {
       };
 
       // Send the email
-      transporter.sendMail(mailOptions, (error, info) => {
+      transporter.sendMail(mailOptions2, (error, info) => {
         if (error) {
           console.error("Error occurred:", error);
         } else {
