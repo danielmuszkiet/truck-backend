@@ -28,7 +28,7 @@ app.post("/send-email", (req, res) => {
   const { to, email, msg, from, tel, exp, jeepType, yesno } = req.body;
   console.log(req.body, process.env.PASS, process.env.MAIL);
 
-  let htmlMail = `Von: ${from}\n Bis: ${to}\n Tel.: ${tel}\n Erfahrung: ${exp}\n Typ: ${jeepType}\n Bereits Kunde: ${
+  let htmlMail = `Wir haben Ihre Anfrage erhalten.\nFolgende Daten wurden übermittelt:\nVon: ${from}\n Bis: ${to}\n Tel.: ${tel}\n Erfahrung: ${exp}\n Typ: ${jeepType}\n Bereits Kunde: ${
     yesno == "1" ? "Ja" : "Nein"
   }\n Nachricht: ${msg}`;
   // Setup email data
@@ -38,6 +38,10 @@ app.post("/send-email", (req, res) => {
     subject: "Bestätigung Ihrer Anfrage",
     text: htmlMail,
   };
+
+  let htmlMail2 = `Kundenanfrage über Trailex:\nAbholung am: ${from}\n Abgabe am: ${to}\n Tel.: ${tel}\n Erfahrung: ${exp}\n Typ: ${jeepType}\n Bereits Kunde: ${
+    yesno == "1" ? "Ja" : "Nein"
+  }\n Nachricht: ${msg}`;
 
   // Send the email
   transporter.sendMail(mailOptions, (error, info) => {
@@ -49,7 +53,7 @@ app.post("/send-email", (req, res) => {
         from: process.env.MAIL,
         to: process.env.MAIL,
         subject: "Anfrage",
-        text: htmlMail,
+        text: htmlMail2,
       };
 
       // Send the email
