@@ -33,7 +33,7 @@ app.post("/send-email", (req, res) => {
   }\n Nachricht: ${msg}`;
   // Setup email data
   let mailOptions = {
-    from: process.env.MAIL,
+    from: "Trailex.com", //process.env.MAIL,
     to: email,
     subject: "Bestätigung Ihrer Anfrage",
     text: htmlMail,
